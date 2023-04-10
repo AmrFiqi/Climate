@@ -20,7 +20,7 @@ class WeatherViewController: UIViewController, UITextFieldDelegate {
     // MARK: - IBActions
     
     @IBAction func searchPressed(_ sender: UIButton) {
-        print(searchTextField.text!)
+        searchOrGoPressed()
     }
     
     
@@ -33,12 +33,32 @@ class WeatherViewController: UIViewController, UITextFieldDelegate {
         searchTextField.delegate = self
     }
     
+    func searchOrGoPressed() {
+        print(searchTextField.text!)
+        searchTextField.endEditing(true)
+    }
+    
     
     // MARK: - UI Text Field Delegates
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        print(searchTextField.text!)
+        searchOrGoPressed()
         return true
+    }
+    
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        if textField.text != "" {
+            textField.placeholder = "Search"
+            return true
+        }
+        else {
+            textField.placeholder = "Type Something!"
+            return false
+        }
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        searchTextField.text = ""
     }
     
 }
