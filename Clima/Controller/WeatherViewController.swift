@@ -5,7 +5,6 @@
 //  Created by Angela Yu on 01/09/2019.
 //  Copyright © 2019 App Brewery. All rights reserved.
 //
-
 import UIKit
 
 class WeatherViewController: UIViewController, UITextFieldDelegate {
@@ -16,6 +15,10 @@ class WeatherViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var temperatureLabel: UILabel!
     @IBOutlet var searchTextField: UITextField!
     @IBOutlet weak var cityLabel: UILabel!
+    
+    // MARK: - Struct Objects
+    
+    var weatherManager = WeatherManager()
     
     // MARK: - IBActions
     
@@ -58,8 +61,12 @@ class WeatherViewController: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
+        // Get the text field and search the city
+        if let city = searchTextField.text {
+            weatherManager.fetchWeather(cityName: city)
+        }
+        
         searchTextField.text = ""
     }
-    
 }
 
