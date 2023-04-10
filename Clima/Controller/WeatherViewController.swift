@@ -8,17 +8,38 @@
 
 import UIKit
 
-class WeatherViewController: UIViewController {
+class WeatherViewController: UIViewController, UITextFieldDelegate {
+    
+    // MARK: - IBOutlets
 
     @IBOutlet weak var conditionImageView: UIImageView!
     @IBOutlet weak var temperatureLabel: UILabel!
+    @IBOutlet var searchTextField: UITextField!
     @IBOutlet weak var cityLabel: UILabel!
+    
+    // MARK: - IBActions
+    
+    @IBAction func searchPressed(_ sender: UIButton) {
+        print(searchTextField.text!)
+    }
+    
+    
+    // MARK: - Class Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        // The TextField delegate is this class.
+        searchTextField.delegate = self
     }
-
-
+    
+    
+    // MARK: - UI Text Field Delegates
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        print(searchTextField.text!)
+        return true
+    }
+    
 }
 
