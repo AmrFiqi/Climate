@@ -10,7 +10,7 @@ import Foundation
 
 struct WeatherModel {
     let conditionId: Int
-    let cityNmae: String
+    let cityName: String
     var temprature: Double
     
     
