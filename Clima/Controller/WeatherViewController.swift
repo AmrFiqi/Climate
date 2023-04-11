@@ -7,7 +7,7 @@
 //
 import UIKit
 
-class WeatherViewController: UIViewController, UITextFieldDelegate {
+class WeatherViewController: UIViewController, UITextFieldDelegate, WeatherManagerDelegate {
     
     // MARK: - IBOutlets
 
@@ -23,6 +23,7 @@ class WeatherViewController: UIViewController, UITextFieldDelegate {
     // MARK: - IBActions
     
     @IBAction func searchPressed(_ sender: UIButton) {
+
         searchOrGoPressed()
     }
     
@@ -31,8 +32,8 @@ class WeatherViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // The TextField delegate is this class.
+
+        weatherManager.delegate = self
         searchTextField.delegate = self
     }
     
@@ -40,7 +41,6 @@ class WeatherViewController: UIViewController, UITextFieldDelegate {
         print(searchTextField.text!)
         searchTextField.endEditing(true)
     }
-    
     
     // MARK: - UI Text Field Delegates
     
@@ -67,6 +67,13 @@ class WeatherViewController: UIViewController, UITextFieldDelegate {
         }
         
         searchTextField.text = ""
+    }
+    
+    // MARK: - Weather Manager Delegate Methods
+    
+    
+    func didUpdateWeather(weather: WeatherModel) {
+        print( weather.temprature)
     }
 }
 
