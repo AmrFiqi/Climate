@@ -10,8 +10,14 @@ import Foundation
 
 struct WeatherStruct: Decodable{
     let name: String
+    let weather: [Weather]
     let main: Main
     
+    
+    struct Weather: Decodable {
+        var id: Int
+        var description: String
+    }
     
     struct Main: Decodable{
         var temp: Double
