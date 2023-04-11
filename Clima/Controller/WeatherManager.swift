@@ -19,6 +19,7 @@ struct WeatherManager {
     
     var delegate: WeatherManagerDelegate?
     
+    // ADD YOUR OWN API
     let weatherURL = "https://api.openweathermap.org/data/2.5/weather?appid=&units=metric"
     
     
