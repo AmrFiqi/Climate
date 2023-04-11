@@ -7,7 +7,7 @@
 //
 import UIKit
 
-class WeatherViewController: UIViewController, UITextFieldDelegate, WeatherManagerDelegate {
+class WeatherViewController: UIViewController {
     
     // MARK: - IBOutlets
 
@@ -23,10 +23,8 @@ class WeatherViewController: UIViewController, UITextFieldDelegate, WeatherManag
     // MARK: - IBActions
     
     @IBAction func searchPressed(_ sender: UIButton) {
-
         searchOrGoPressed()
     }
-    
     
     // MARK: - Class Methods
     
@@ -42,8 +40,11 @@ class WeatherViewController: UIViewController, UITextFieldDelegate, WeatherManag
         searchTextField.endEditing(true)
     }
     
-    // MARK: - UI Text Field Delegates
-    
+}
+
+    // MARK: - UI Text Field Delegate & Extension
+
+extension WeatherViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         searchOrGoPressed()
         return true
@@ -68,8 +69,11 @@ class WeatherViewController: UIViewController, UITextFieldDelegate, WeatherManag
         
         searchTextField.text = ""
     }
-    
-    // MARK: - Weather Manager Delegate Methods
+}
+
+    // MARK: - Weather Manager Delegate & Extension
+
+extension WeatherViewController: WeatherManagerDelegate {
     
     func didUpdateWeather(_ weatherManager: WeatherManager, weather: WeatherModel) {
         DispatchQueue.main.async {
@@ -77,12 +81,11 @@ class WeatherViewController: UIViewController, UITextFieldDelegate, WeatherManag
             self.cityLabel.text = weather.cityName
             self.conditionImageView.image = UIImage(systemName: weather.conditionName)
         }
-        
-        
     }
     
     func didFailWithError(error: Error) {
         print(String(describing: error))
     }
 }
+
 
